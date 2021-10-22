@@ -4,11 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/SijanNeupane/RunningTracker/app/src/main/res/layout-land/fragment_statistics.xml" value="0.18" />
+        <entry key="..\:/SijanNeupane/RunningTracker/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
+        <entry key="..\:/SijanNeupane/RunningTracker/app/src/main/res/layout/fragment_setup.xml" value="0.18645833333333334" />
         <entry key="..\:/SijanNeupane/RunningTracker/app/src/main/res/layout/fragment_statistics.xml" value="0.22" />
+        <entry key="..\:/SijanNeupane/RunningTracker/app/src/main/res/menu/bottom_nav_menu.xml" value="0.18645833333333334" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
