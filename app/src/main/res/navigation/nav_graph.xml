@@ -4,6 +4,11 @@
     android:id="@+id/nav_graph.xml"
     app:startDestination="@id/setupFragment">
 
+    <action
+        android:id="@+id/actionGlobalTrackingFragment"
+        app:destination="@+id/trackingFragment"
+        app:launchSingleTop="true"/>
+
     <fragment
         android:id="@+id/runFragment"
         android:name="com.sijanneupane.runningtracker.ui.fragments.RunFragment"
