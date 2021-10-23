@@ -115,4 +115,7 @@ dependencies {
 
     //lifecycle extensions
     implementation 'android.arch.lifecycle:extensions:1.1.1'
+
+    // Easy Permissions
+    implementation 'pub.devrel:easypermissions:3.0.0'
 }
