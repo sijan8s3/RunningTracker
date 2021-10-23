@@ -45,22 +45,22 @@ as a LifecycleOwner to that observe function
  */
 
 typealias Polyline= MutableList<LatLng>
-typealias Polylines= MutableList<Polyline>
+//typealias Polylines= MutableList<Polyline>
 
 
 class TrackingService: LifecycleService() {
 
-    var isFirstRun= true
+    //var isFirstRun= true
 
     companion object {
         val isTracking= MutableLiveData<Boolean>()
-        val pathPoints= MutableLiveData<Polylines>()
+        //val pathPoints= MutableLiveData<Polyline>()
     }
 
     //empty values || no tracking
     private fun postInitialValues(){
         isTracking.postValue(false)
-        pathPoints.postValue(mutableListOf())
+        //pathPoints.postValue(mutableListOf())
     }
 
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -81,12 +81,12 @@ class TrackingService: LifecycleService() {
         intent?.let {
             when(it.action){
                 ACTION_START_OR_RESUME_SERVICE ->{
-                    if (isFirstRun){
-                        startForegroundService()
-                        isFirstRun= false
-                    }else{
-                        Timber.d("Resuming service")
-                    }
+                    //if (isFirstRun){
+                    startForegroundService()
+                    //isFirstRun= false
+                    //}else{
+                    Timber.d("Resuming service")
+                    //}
                     //Timber.d("Started or resumed service")
                 }
                 ACTION_PAUSE_SERVICE ->{
@@ -102,34 +102,37 @@ class TrackingService: LifecycleService() {
     }
 
     //empty lines for path breaks and tracking off on pause
-    private fun addEmptyPolyline()= pathPoints.value?.apply {
-        add(mutableListOf())
-        pathPoints.postValue(this)
-    }?: pathPoints.postValue(mutableListOf(mutableListOf()))
+//    private fun addEmptyPolyline()= pathPoints.value?.apply {
+//        add(mutableListOf())
+//        pathPoints.postValue(this)
+//    }?: pathPoints.postValue(mutableListOf(mutableListOf()))
 
 
     //add last path points of the line
-    private fun addPathPoint(location: Location?){
-        location?.let {
-            val pos= LatLng(location.latitude, location.longitude)
-            pathPoints.value?.apply {
-                last().add(pos)
-                pathPoints.postValue(this)
-            }
-        }
-    }
+//    private fun addPathPoint(location: Location?){
+//        location?.let {
+//            val pos= LatLng(location.latitude, location.longitude)
+//            pathPoints.value?.apply {
+//                last().add(pos)
+//                pathPoints.postValue(this)
+//            }
+//        }
+//    }
 
     //get updated location
-    val locationCallback= object: LocationCallback(){
+    val locationCallback= object: LocationCallback() {
         override fun onLocationResult(result: LocationResult) {
             super.onLocationResult(result)
-            if (isTracking.value!!){
-                result?.locations?.let { locations->
-                    for (location in locations){
-                        addPathPoint(location)
+            if (isTracking.value!!) {
+                result?.locations?.let { locations ->
+                    for (location in locations) {
+                        //addPathPoint(location)
                         Timber.d("New Location: ${location.latitude}, ${location.longitude}")
-                    }
 
+                        //TODO SEND LATITUDE AND LONGITUDE VIA API
+
+
+                    }
                 }
             }
         }
@@ -157,36 +160,35 @@ class TrackingService: LifecycleService() {
 
 
     private fun startForegroundService() {
-        addEmptyPolyline()
+        //addEmptyPolyline()
         isTracking.postValue(true)
 
         val notificationManager= getSystemService(Context.NOTIFICATION_SERVICE)
-        as NotificationManager
+                as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel(notificationManager)
         }
 
         val notificationBuilder= NotificationCompat.Builder(
-        this, NOTIFICATION_CHANNEL_ID
+            this, NOTIFICATION_CHANNEL_ID
         ).setAutoCancel(false)
             .setOngoing(true)
-            .setSmallIcon(R.drawable.ic_directions_run_black_24dp)
-            .setContentTitle("Running Tracker")
-            .setContentText("00:00:00")
-            .setContentIntent(getMainActivityPendingIntent())
+            .setSmallIcon(R.drawable.ic_run)
+            .setContentTitle("Tasky")
+        //.setContentIntent(getMainActivityPendingIntent())
 
         startForeground(NOTIFICATION_ID, notificationBuilder.build())
     }
 
-    private fun getMainActivityPendingIntent()= PendingIntent.getActivity(
-        this,
-        0,
-        Intent(this, MainActivity::class.java).also {
-            it.action= ACTION_SHOW_TRACKING_FRAGMENT
-        },
-        FLAG_UPDATE_CURRENT
-    )
+//    private fun getMainActivityPendingIntent()= PendingIntent.getActivity(
+//        this,
+//        0,
+//        Intent(this, NavigationActivity::class.java).also {
+//            it.action= ACTION_SHOW_TRACKING_FRAGMENT
+//        },
+//        FLAG_UPDATE_CURRENT
+//    )
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(notificationManager: NotificationManager){
@@ -199,3 +201,4 @@ class TrackingService: LifecycleService() {
         notificationManager.createNotificationChannel(channel)
     }
 }
+
