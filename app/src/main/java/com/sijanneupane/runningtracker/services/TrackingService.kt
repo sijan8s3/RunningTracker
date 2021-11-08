@@ -11,6 +11,7 @@ import android.content.Intent
 import android.location.Location
 import android.os.Build
 import android.os.Looper
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
@@ -128,6 +129,7 @@ class TrackingService: LifecycleService() {
                     for (location in locations) {
                         //addPathPoint(location)
                         Timber.d("New Location: ${location.latitude}, ${location.longitude}")
+                        Toast.makeText(applicationContext, "Inside it", Toast.LENGTH_SHORT).show()
 
                         //TODO SEND LATITUDE AND LONGITUDE VIA API
 
