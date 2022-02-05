@@ -4,11 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/SijanNeupane/RunningTracker/app/src/main/res/layout-land/fragment_statistics.xml" value="0.18" />
+        <entry key="..\:/SijanNeupane/RunningTracker/app/src/main/res/layout-land/fragment_tracking.xml" value="0.23802083333333332" />
         <entry key="..\:/SijanNeupane/RunningTracker/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
+        <entry key="..\:/SijanNeupane/RunningTracker/app/src/main/res/layout/fragment_run.xml" value="0.20416666666666666" />
         <entry key="..\:/SijanNeupane/RunningTracker/app/src/main/res/layout/fragment_setup.xml" value="0.18645833333333334" />
         <entry key="..\:/SijanNeupane/RunningTracker/app/src/main/res/layout/fragment_statistics.xml" value="0.22" />
-        <entry key="..\:/SijanNeupane/RunningTracker/app/src/main/res/layout/fragment_tracking.xml" value="0.18645833333333334" />
+        <entry key="..\:/SijanNeupane/RunningTracker/app/src/main/res/layout/fragment_tracking.xml" value="0.1" />
         <entry key="..\:/SijanNeupane/RunningTracker/app/src/main/res/menu/bottom_nav_menu.xml" value="0.18645833333333334" />
+        <entry key="..\:/SijanNeupane/RunningTracker/app/src/main/res/menu/toolbar_tracking_menu.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
