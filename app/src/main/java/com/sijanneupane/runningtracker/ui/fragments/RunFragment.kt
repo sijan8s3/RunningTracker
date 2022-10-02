@@ -3,6 +3,7 @@ package com.sijanneupane.runningtracker.ui.fragments
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sijanneupane.runningtracker.R
 import com.sijanneupane.runningtracker.adapters.RunAdapter
 import com.sijanneupane.runningtracker.other.Constants.REQUEST_CODE_LOCATION_PERMISSION
+import com.sijanneupane.runningtracker.other.SortType
 import com.sijanneupane.runningtracker.other.TrackingUtility
 import com.sijanneupane.runningtracker.ui.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,9 +36,34 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
         requestPermission()
         setupRecyclerView()
 
-        viewModel.runSortedByDate.observe(viewLifecycleOwner, Observer {
+        viewModel.runs.observe(viewLifecycleOwner, Observer {
             runAdapter.submitList(it)
         })
+
+        when(viewModel.sortType){
+            SortType.DATE -> spFilter.setSelection(0)
+            SortType.RUNNING_TIME -> spFilter.setSelection(2)
+            SortType.DISTANCE -> spFilter.setSelection(3)
+            SortType.AVG_SPEED -> spFilter.setSelection(4)
+            SortType.CALORIES_BURNED -> spFilter.setSelection(5)
+        }
+
+        spFilter.onItemSelectedListener= object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                when(position){
+                    0 -> viewModel.sortRuns(SortType.DATE)
+                    1 -> viewModel.sortRuns(SortType.RUNNING_TIME)
+                    2 -> viewModel.sortRuns(SortType.DISTANCE)
+                    3 -> viewModel.sortRuns(SortType.AVG_SPEED)
+                    4 -> viewModel.sortRuns(SortType.CALORIES_BURNED)
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+        }
 
         fab.setOnClickListener {
             findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
